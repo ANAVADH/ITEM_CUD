@@ -1,5 +1,4 @@
 'use client';
-
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
@@ -20,7 +19,7 @@ const AuthGuard = ({ children, adminOnly = false }) => {
     }
   }, [router, adminOnly]);
 
-  if (!isAuthorized) return null; 
+  if (!isAuthorized) return null;
 
   return <>{children}</>;
 };

@@ -5,23 +5,24 @@ import React, { useState } from 'react'
 import ToastMessage, { showToast } from '../../components/ToastMessage';
 
 function AddUser() {
-const [password,setPassword] = useState('')
-const [email,setEmail] = useState('')
+	const [password, setPassword] = useState('')
+	const [email, setEmail] = useState('')
 
-const handleSave=async()=>{
-    if(email.length > 0 && password.length > 0){
-       const res = await createUser(email,password)
-	   if(res.success){
-		showToast(res.message, true);
-		setEmail('')
-		setPassword('')
-	}else{
-		showToast(res.message, false);
+	const handleSave = async () => {
+		if (email.length > 0 && password.length > 0) {
+			const res = await createUser(email, password)
+			if (res.success) {
+				showToast(res.message, true);
+				setEmail('')
+				setPassword('')
+			} else {
+				showToast(res.message, false);
+			}
+		}
 	}
-    }}
 
-  return (
-   	<div>
+	return (
+		<div>
 			<Dialog.Root>
 				<Dialog.Trigger>
 					<Button color='orange' style={{ width: "150px" }}>Add User</Button>
@@ -38,8 +39,8 @@ const handleSave=async()=>{
 								Email
 							</Text>
 							<TextField.Root
-							    value={email}
-                                onChange={(e) =>setEmail(e.target.value)}
+								value={email}
+								onChange={(e) => setEmail(e.target.value)}
 								placeholder="Enter email"
 							/>
 						</label>
@@ -48,8 +49,8 @@ const handleSave=async()=>{
 								Password
 							</Text>
 							<TextField.Root
-							    value={password}
-                                onChange={(e) =>setPassword(e.target.value)}
+								value={password}
+								onChange={(e) => setPassword(e.target.value)}
 								placeholder="Enter your password"
 							/>
 						</label>
@@ -61,15 +62,13 @@ const handleSave=async()=>{
 								Close
 							</Button>
 						</Dialog.Close>
-						
-							<Button onClick={handleSave}>Save</Button>
-							<ToastMessage/>
-						
+						<Button onClick={handleSave}>Save</Button>
+						<ToastMessage />
 					</Flex>
 				</Dialog.Content>
 			</Dialog.Root>
 		</div>
-  )
+	)
 }
 
 export default AddUser

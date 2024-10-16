@@ -1,11 +1,9 @@
 
-import {  Heading } from '@radix-ui/themes'
+import { Heading } from '@radix-ui/themes'
 import React from 'react'
 import AddItem from './AddItem'
 import ViewItems from './ViewItems'
 import Logout from './Logout'
-
-
 
 function Dashboard() {
 
@@ -14,7 +12,7 @@ function Dashboard() {
       <Heading color='jade' mb="2" size="9">Hi,Welcome Back</Heading>
       <AddItem />
       <ViewItems />
-      <Logout/>
+      <Logout />
     </div>
   )
 }

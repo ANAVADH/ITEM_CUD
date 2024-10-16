@@ -6,13 +6,10 @@ import { CrossCircledIcon } from '@radix-ui/react-icons'
 import prisma from '@/lib/prisma'
 
 
+async function ViewItems() {
 
+	const data = await prisma.items.findMany()
 
-
-async function ViewItems () { 
-
-	const data = await prisma.items.findMany()	
-	
 	return (
 		<div>
 			<Dialog.Root>
@@ -31,11 +28,11 @@ async function ViewItems () {
 							</Dialog.Close>
 						</Flex>
 					</Flex>
-					
+
 					<div className='flex flex-col  gap-5'>
 						{
-							data?.map((eachItem,index)=>(
-                       <ItemCard key={index} title={eachItem?.title} desc={eachItem?.description} createdBy={eachItem?.createdBy} itemId={eachItem?.id}  />
+							data?.map((eachItem, index) => (
+								<ItemCard key={index} title={eachItem?.title} desc={eachItem?.description} createdBy={eachItem?.createdBy} itemId={eachItem?.id} />
 							))
 						}
 					</div>

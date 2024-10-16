@@ -3,48 +3,48 @@ import prisma from "./prisma";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-export const createItems = async (data)=>{
-    try{
-        await prisma.items.create({
-          data:{
-            title:data.title,
-            description:data.description,
-            createdBy:data.userId
-          },
-        })
-        return { success: true, error: false , message:'Successfully Created..!' };
-    }
-    catch(err){
-        console.log(`Got a server issue , Err:${err}`)
-        return { success: false, error: true , message:err };
-    }
+export const createItems = async (data) => {
+  try {
+    await prisma.items.create({
+      data: {
+        title: data.title,
+        description: data.description,
+        createdBy: data.userId
+      },
+    })
+    return { success: true, error: false, message: 'Successfully Created..!' };
+  }
+  catch (err) {
+    console.log(`Got a server issue , Err:${err}`)
+    return { success: false, error: true, message: err };
+  }
 }
 
 
 export const deleteItem = async (id) => {
 
-    try {
-      await prisma.items.delete({
-        where: {
-          id: parseInt(id),
-        },
-      });
+  try {
+    await prisma.items.delete({
+      where: {
+        id: parseInt(id),
+      },
+    });
 
-    return { success: true, error: false, message:"Item Deleted" };
-} catch (err) {
-  console.log(err);
-  return { success: false, error: true , message:err };
-}
+    return { success: true, error: false, message: "Item Deleted" };
+  } catch (err) {
+    console.log(err);
+    return { success: false, error: true, message: err };
+  }
 };
 
 
 
 export const loginUser = async (data) => {
 
-  try{
+  try {
 
     const user = await prisma.user.findUnique({
-      where: { email:data.email },
+      where: { email: data.email },
     });
 
     if (!user) {
@@ -62,7 +62,7 @@ export const loginUser = async (data) => {
     const token = jwt.sign(
       { userId: user.id, email: user.email },
       JWT_SECRET,
-      { expiresIn: "2h" } 
+      { expiresIn: "2h" }
     );
 
     return {
@@ -71,20 +71,20 @@ export const loginUser = async (data) => {
       token,
       email: user.email,
       userId: user.id,
-      message:"Successfully Loggedin"
+      message: "Successfully Loggedin"
     };
 
   }
-  catch(err){
-    console.log("ERROR OCCUREDDD",err);
-    return { success: false, error: true , message:err.message };
+  catch (err) {
+    console.log("ERROR OCCUREDDD", err);
+    return { success: false, error: true, message: err.message };
   }
 }
 
 
 export const createUser = async (email, password) => {
 
-  try{
+  try {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const newUser = await prisma.user.create({
@@ -102,7 +102,7 @@ export const createUser = async (email, password) => {
     };
 
   }
-  catch(err){
+  catch (err) {
     console.log(`Error creating user, Error: ${err}`);
     return {
       success: false,

@@ -5,21 +5,22 @@ import React, { useState } from 'react'
 import ToastMessage, { showToast } from '../../components/ToastMessage';
 
 function AddItem() {
-const [title,setTitle] = useState('')
-const [description,setDescription] = useState('')
-const currentUser = localStorage.getItem('user')
+	const [title, setTitle] = useState('')
+	const [description, setDescription] = useState('')
+	const currentUser = localStorage.getItem('user')
 
-const handleSave=async()=>{
-if(title.length > 0 && description.length > 0){
-	const res =await createItems({title,description,userId:parseInt(currentUser)})
-	if(res.success){
-		showToast(res.message, true);
-		setTitle('')
-		setDescription('')
-	}else{
-		showToast(res.message, false);
+	const handleSave = async () => {
+		if (title.length > 0 && description.length > 0) {
+			const res = await createItems({ title, description, userId: parseInt(currentUser) })
+			if (res.success) {
+				showToast(res.message, true);
+				setTitle('')
+				setDescription('')
+			} else {
+				showToast(res.message, false);
+			}
+		}
 	}
-}}
 
 	return (
 		<div>
@@ -39,8 +40,8 @@ if(title.length > 0 && description.length > 0){
 								Title
 							</Text>
 							<TextField.Root
-							value={title}
-                                onChange={(e) =>setTitle(e.target.value)}
+								value={title}
+								onChange={(e) => setTitle(e.target.value)}
 								placeholder="Enter your title here"
 							/>
 						</label>
@@ -49,8 +50,8 @@ if(title.length > 0 && description.length > 0){
 								Description
 							</Text>
 							<TextField.Root
-							value={description}
-                                onChange={(e) =>setDescription(e.target.value)}
+								value={description}
+								onChange={(e) => setDescription(e.target.value)}
 								placeholder="Enter your description"
 							/>
 						</label>
@@ -62,12 +63,8 @@ if(title.length > 0 && description.length > 0){
 								Close
 							</Button>
 						</Dialog.Close>
-						
 						<Button onClick={handleSave}>Save</Button>
-					
-							
-							<ToastMessage/>
-						
+						<ToastMessage />
 					</Flex>
 				</Dialog.Content>
 			</Dialog.Root>
