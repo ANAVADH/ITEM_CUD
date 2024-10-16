@@ -3,9 +3,9 @@ import { deleteItem } from '@/lib/actions'
 import { TrashIcon } from '@radix-ui/react-icons'
 import { Card, Flex, IconButton, Text } from '@radix-ui/themes'
 import React from 'react'
-import ToastMessage, { showToast } from '../../components/ToastMessage';
 
-function ItemCard({ title, desc, itemId, createdBy }) {
+
+function ItemCard({ title, desc, itemId, createdBy, onDeleteItem }) {
 
 	const currentUser = localStorage.getItem('user')
 
@@ -15,16 +15,15 @@ function ItemCard({ title, desc, itemId, createdBy }) {
 		if (id) {
 			const res = await deleteItem(id)
 			if (res.success) {
-				showToast(res.message, true);
+				onDeleteItem(id, true, res.message)
 			} else {
-				showToast(res.message, false);
+				onDeleteItem(id, false, res.message)
 			}
 		}
 	}
 
 	return (
 		<Card mt={2} variant="surface">
-			<ToastMessage />
 			<Flex justify='between'>
 				<div>
 					<Text as="div" size="2" weight="bold">

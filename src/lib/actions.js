@@ -3,6 +3,13 @@ import prisma from "./prisma";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
+
+
+export async function getItems() {
+	const data = await prisma.items.findMany();
+	return data;
+  }
+
 export const createItems = async (data) => {
   try {
     await prisma.items.create({
