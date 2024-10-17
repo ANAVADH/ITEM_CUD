@@ -9,7 +9,7 @@ function ItemCard({ title, desc, itemId, createdBy, onDeleteItem }) {
 
 	const currentUser = localStorage.getItem('user')
 
-	console.log(`createdBy:${createdBy},currentUser:${currentUser}`)
+	
 
 	const handleDelete = async (id) => {
 		if (id) {

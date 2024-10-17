@@ -3,8 +3,9 @@ import { Button, Dialog, Flex, IconButton } from '@radix-ui/themes'
 import React, { useEffect, useState } from 'react'
 import ItemCard from './ItemCard'
 import { CrossCircledIcon } from '@radix-ui/react-icons'
-import { getItems } from '@/lib/actions'
+
 import ToastMessage, { showToast } from '../../components/ToastMessage';
+import { getItemsByUser } from '@/lib/actions'
 
 
 function ViewItems() {
@@ -12,10 +13,11 @@ function ViewItems() {
 	const [data, setData] = useState([]);
 	const [isOpen, setIsOpen] = useState(false);
 	const [itemId, setItemId] = useState(0)
+	const currentUser = localStorage.getItem('user')
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const items = await getItems();
+			const items = await getItemsByUser(parseInt(currentUser));
 			setData(items);
 		};
 		fetchData();

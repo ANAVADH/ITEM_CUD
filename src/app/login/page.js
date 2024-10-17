@@ -1,6 +1,6 @@
 'use client'
 import { loginUser } from '@/lib/actions';
-import { Button, TextField } from '@radix-ui/themes'
+import { Button, Flex, TextField } from '@radix-ui/themes'
 import { useRouter } from 'next/navigation';
 import ToastMessage, { showToast } from '../../components/ToastMessage';
 
@@ -47,7 +47,7 @@ function LoginPage() {
 
                     <div>
                         <TextField.Root
-                            style={{ width: '300px' }}
+                            style={{ width: '320px' }}
                             size="3"
                             placeholder="email"
                             onChange={(e) => setEmail(e.target.value)}
@@ -72,7 +72,7 @@ function LoginPage() {
                     </div>
                     <div>
                         <TextField.Root
-                            style={{ width: '300px' }}
+                            style={{ width: '320px' }}
                             type={isPasswordVisible ? 'text' : 'password'}
                             size="3"
                             placeholder="password"
@@ -117,9 +117,15 @@ function LoginPage() {
                             </TextField.Slot>
                         </TextField.Root>
                     </div>
-                    <Button onClick={handleLogin} size='2' color="gray" variant="solid" highContrast>
-                        Login
-                    </Button>
+                    <Flex direction='column' justify='between' gap='3'>
+                        <Button onClick={handleLogin} size='5' color="gray" variant="solid" highContrast>
+                            Login
+                        </Button>
+                        <Button onClick={() => { router.push('/items') }} size='2' color="indigo" variant="solid" highContrast>
+                            Item Gallery
+                        </Button>
+                    </Flex>
+
                     <ToastMessage />
 
                 </div>

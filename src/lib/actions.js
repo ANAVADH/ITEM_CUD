@@ -5,15 +5,24 @@ import jwt from "jsonwebtoken";
 
 
 
-export async function getItems() {
-	const data = await prisma.items.findMany();
-	return data;
-  }
+export async function getAllItems() {
+  const data = await prisma.items.findMany();
+  return data;
+}
 
-export async function getAllUsers(){
+export async function getItemsByUser(userId) {
+  const data = await prisma.items.findMany({
+    where: {
+      createdBy: userId,
+    },
+  });
+  return data;
+}
+
+export async function getAllUsers() {
   const data = await prisma.user.findMany();
   return data;
-  }
+}
 
 export const createItems = async (data) => {
   try {
