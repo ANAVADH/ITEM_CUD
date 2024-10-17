@@ -10,6 +10,11 @@ export async function getItems() {
 	return data;
   }
 
+export async function getAllUsers(){
+  const data = await prisma.user.findMany();
+  return data;
+  }
+
 export const createItems = async (data) => {
   try {
     await prisma.items.create({

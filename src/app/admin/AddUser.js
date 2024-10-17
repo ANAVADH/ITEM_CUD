@@ -4,7 +4,7 @@ import { Button, Dialog, Flex, Text, TextField } from '@radix-ui/themes'
 import React, { useState } from 'react'
 import ToastMessage, { showToast } from '../../components/ToastMessage';
 
-function AddUser() {
+function AddUser({isAdmin,confirmAdminPage}) {
 	const [password, setPassword] = useState('')
 	const [email, setEmail] = useState('')
 
@@ -15,6 +15,7 @@ function AddUser() {
 				showToast(res.message, true);
 				setEmail('')
 				setPassword('')
+				isAdmin && confirmAdminPage(res)
 			} else {
 				showToast(res.message, false);
 			}
@@ -25,12 +26,12 @@ function AddUser() {
 		<div>
 			<Dialog.Root>
 				<Dialog.Trigger>
-					<Button color='orange' style={{ width: "150px" }}>Add User</Button>
+					<Button color='orange' style={{ width: "150px" }}>{isAdmin ?'Add Admin' : 'Add User'}</Button>
 				</Dialog.Trigger>
 				<Dialog.Content maxWidth="450px">
-					<Dialog.Title>Add User</Dialog.Title>
+					<Dialog.Title>{isAdmin ?'Create Admin' : 'Add User'}</Dialog.Title>
 					<Dialog.Description size="2" mb="4">
-						Register User
+					{isAdmin ?'Note - user with ID:1 is considered as Admin' : 'Register User'}	
 					</Dialog.Description>
 
 					<Flex direction="column" gap="3">
